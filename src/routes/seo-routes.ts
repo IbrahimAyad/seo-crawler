@@ -12,7 +12,7 @@ const router = Router();
  * POST /api/seo/audit
  * Run full SEO audit on a website
  */
-router.post('/audit', async (req: Request, res: Response): Promise<void> => {
+router.post('/audit', async (req: Request, res: Response): Promise<any> => {
   try {
     const {
       url,
@@ -81,7 +81,7 @@ router.post('/audit', async (req: Request, res: Response): Promise<void> => {
  * POST /api/seo/analyze-page
  * Analyze a single page (faster, no crawling)
  */
-router.post('/analyze-page', async (req: Request, res: Response): Promise<void> => {
+router.post('/analyze-page', async (req: Request, res: Response): Promise<any> => {
   try {
     const { url, waitForSelector } = req.body;
 
