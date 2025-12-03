@@ -3,7 +3,7 @@
  * Handles JavaScript-rendered site crawling with Puppeteer
  */
 
-import puppeteer, { Browser, Page } from 'puppeteer';
+import puppeteer, { Browser } from 'puppeteer';
 import * as cheerio from 'cheerio';
 
 export interface CrawlConfig {
@@ -113,7 +113,7 @@ export class SEOCrawlerService {
       }
 
       // Additional wait for JavaScript to execute
-      await page.waitForTimeout(2000);
+      await new Promise(resolve => setTimeout(resolve, 2000));
 
       const html = await page.content();
       const statusCode = response?.status() || 0;
@@ -290,6 +290,8 @@ export class SEOCrawlerService {
     disallowed: string[];
     crawlDelay: number | null;
   }> {
+    const defaultResult = { sitemaps: [] as string[], disallowed: [] as string[], crawlDelay: null as number | null };
+
     try {
       const robotsUrl = new URL('/robots.txt', baseUrl).toString();
       const { html } = await this.fetchPage(robotsUrl);
@@ -313,7 +315,7 @@ export class SEOCrawlerService {
       return { sitemaps, disallowed, crawlDelay };
     } catch (error) {
       console.error('Error fetching robots.txt:', error);
-      return { sitemaps: [], disallowed: [], crawlDelay: null };
+      return defaultResult;
     }
   }
 

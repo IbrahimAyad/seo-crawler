@@ -12,7 +12,7 @@ const router = Router();
  * POST /api/seo/audit
  * Run full SEO audit on a website
  */
-router.post('/audit', async (req: Request, res: Response) => {
+router.post('/audit', async (req: Request, res: Response): Promise<void> => {
   try {
     const {
       url,
@@ -81,7 +81,7 @@ router.post('/audit', async (req: Request, res: Response) => {
  * POST /api/seo/analyze-page
  * Analyze a single page (faster, no crawling)
  */
-router.post('/analyze-page', async (req: Request, res: Response) => {
+router.post('/analyze-page', async (req: Request, res: Response): Promise<void> => {
   try {
     const { url, waitForSelector } = req.body;
 
@@ -133,7 +133,7 @@ router.post('/analyze-page', async (req: Request, res: Response) => {
  * GET /api/seo/health
  * Health check endpoint
  */
-router.get('/health', (req: Request, res: Response) => {
+router.get('/health', (_req: Request, res: Response) => {
   res.json({
     success: true,
     status: 'healthy',
