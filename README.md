@@ -85,7 +85,7 @@ POST /api/seo/audit
 Body:
 {
   "url": "https://kctmenswear.com",
-  "maxPages": 100,              // Default: 100
+  "maxPages": 1000,             // Default: 1000
   "followSitemap": true,        // Default: true
   "respectRobotsTxt": true,     // Default: true
   "waitForSelector": ".content" // Optional
@@ -219,6 +219,7 @@ SEO_CRAWL_DELAY=1000        # Delay between requests (ms)
 
 - **Single page analysis**: ~3-5 seconds
 - **100 page crawl**: ~2-3 minutes (1 second delay between pages)
+- **1000 page crawl**: ~17-20 minutes (1 second delay between pages)
 - **Memory usage**: ~300-500MB (Chromium overhead)
 
 ## Tech Stack

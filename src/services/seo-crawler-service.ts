@@ -329,7 +329,7 @@ export class SEOCrawlerService {
   async crawlSite(config: CrawlConfig): Promise<PageAnalysis[]> {
     const {
       url,
-      maxPages = 100,
+      maxPages = 1000,
       followSitemap = true,
       respectRobotsTxt = true,
     } = config;

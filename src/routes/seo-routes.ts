@@ -16,7 +16,7 @@ router.post('/audit', async (req: Request, res: Response): Promise<any> => {
   try {
     const {
       url,
-      maxPages = 100,
+      maxPages = 1000,
       followSitemap = true,
       respectRobotsTxt = true,
       waitForSelector,
