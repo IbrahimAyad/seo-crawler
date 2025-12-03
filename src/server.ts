@@ -44,6 +44,7 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Rate limiting - 100 requests per minute for testing/production
+// Exclude health checks from rate limiting
 const limiter = rateLimit({
   windowMs: 60 * 1000, // 1 minute
   max: 100,
@@ -53,6 +54,7 @@ const limiter = rateLimit({
   },
   standardHeaders: true,
   legacyHeaders: false,
+  skip: (req) => req.path.includes('/health') // Skip rate limiting for health checks
 });
 
 app.use('/api/', limiter);
