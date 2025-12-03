@@ -2,7 +2,7 @@
 # Includes Chromium and dependencies for Puppeteer
 
 [phases.setup]
-nixPkgs = ["nodejs-18_x", "chromium", "nss", "freetype", "harfbuzz", "ca-certificates", "fontconfig"]
+nixPkgs = ["nodejs-20_x", "chromium", "nss", "freetype", "harfbuzz", "ca-certificates", "fontconfig"]
 
 [phases.install]
 cmds = ["npm ci"]
