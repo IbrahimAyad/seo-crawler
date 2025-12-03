@@ -340,7 +340,7 @@ export class SEOCrawlerService {
     const crawledUrls: Set<string> = new Set();
 
     // Fetch robots.txt
-    let robotsTxt = { sitemaps: [], disallowed: [], crawlDelay: null };
+    let robotsTxt: RobotsTxtResult = { sitemaps: [], disallowed: [], crawlDelay: null };
     if (respectRobotsTxt) {
       robotsTxt = await this.fetchRobotsTxt(baseUrl);
       console.log(`Crawl delay from robots.txt: ${robotsTxt.crawlDelay || 0}ms`);
