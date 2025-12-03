@@ -47,6 +47,12 @@ export interface LinkInfo {
   isNofollow: boolean;
 }
 
+export interface RobotsTxtResult {
+  sitemaps: string[];
+  disallowed: string[];
+  crawlDelay: number | null;
+}
+
 export class SEOCrawlerService {
   private browser: Browser | null = null;
 
@@ -285,17 +291,7 @@ export class SEOCrawlerService {
   /**
    * Fetch and parse robots.txt
    */
-  async fetchRobotsTxt(baseUrl: string): Promise<{
-    sitemaps: string[];
-    disallowed: string[];
-    crawlDelay: number | null;
-  }> {
-    type RobotsTxtResult = {
-      sitemaps: string[];
-      disallowed: string[];
-      crawlDelay: number | null;
-    };
-
+  async fetchRobotsTxt(baseUrl: string): Promise<RobotsTxtResult> {
     try {
       const robotsUrl = new URL('/robots.txt', baseUrl).toString();
       const { html } = await this.fetchPage(robotsUrl);
@@ -319,12 +315,11 @@ export class SEOCrawlerService {
       return { sitemaps, disallowed, crawlDelay };
     } catch (error) {
       console.error('Error fetching robots.txt:', error);
-      const result: RobotsTxtResult = {
+      return {
         sitemaps: [],
         disallowed: [],
         crawlDelay: null
       };
-      return result;
     }
   }
 
