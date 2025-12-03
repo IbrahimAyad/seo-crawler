@@ -290,6 +290,12 @@ export class SEOCrawlerService {
     disallowed: string[];
     crawlDelay: number | null;
   }> {
+    type RobotsTxtResult = {
+      sitemaps: string[];
+      disallowed: string[];
+      crawlDelay: number | null;
+    };
+
     try {
       const robotsUrl = new URL('/robots.txt', baseUrl).toString();
       const { html } = await this.fetchPage(robotsUrl);
@@ -313,11 +319,12 @@ export class SEOCrawlerService {
       return { sitemaps, disallowed, crawlDelay };
     } catch (error) {
       console.error('Error fetching robots.txt:', error);
-      return {
+      const result: RobotsTxtResult = {
         sitemaps: [],
         disallowed: [],
         crawlDelay: null
       };
+      return result;
     }
   }
 
